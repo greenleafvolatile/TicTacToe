@@ -9,9 +9,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 /**
- * The Tic_Tac_Toe_Single_Player_Version_1_0_1 class builds a Tic Tac Toe game grid.
+ * The Tic_Tac_Toe_Single_Player_Version_1_0_2 class builds a Tic Tac Toe game grid.
  */
-public class Tic_Tac_Toe_Single_Player_Version_1_0_1 extends JFrame {
+public class Tic_Tac_Toe_Single_Player_Version_1_0_2 extends JFrame {
 
     private static final Dimension DIMENSION=new Dimension(400, 400);
     private static final int NUMBER_OF_COLUMNS=3, NUMBER_OF_ROWS=3, DEFAULT_GRID_VALUE=0; // The number of rows and columns can be adjusted to play Tic Tac Toe on a grid with more tiles.
@@ -21,35 +21,47 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_1 extends JFrame {
     private int squaresFilled; // this variable is needed to mark an endgame state wherein all tiles are occupied but there is no winner.
     private JPanel mainPanel;
     private boolean gameWon;
+    private Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2[][] gameGrid;
 
 
-    public Tic_Tac_Toe_Single_Player_Version_1_0_1(){
-        Logger.getGlobal().setLevel(Level.OFF);
-        this.ticTacToeGrid=new int[NUMBER_OF_ROWS][NUMBER_OF_COLUMNS];
-        this.squaresFilled=0;
-        this.gameWon=false;
-        this.createMainPanel();
-        this.add(mainPanel);
-        this.pack();
+    public Tic_Tac_Toe_Single_Player_Version_1_0_2(){
+        Logger.getGlobal().setLevel(Level.INFO);
+
+        createMainPanel();
+        constructGameGrid();
+        ticTacToeGrid=new int[NUMBER_OF_ROWS][NUMBER_OF_COLUMNS];
+        squaresFilled=0;
+        gameWon=false;
+        add(mainPanel);
+        pack();
+    }
+
+    private void constructGameGrid(){
+        gameGrid=new Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2[NUMBER_OF_ROWS][NUMBER_OF_COLUMNS];
+        for(int i=0;i<NUMBER_OF_ROWS;i++){
+            for(int j=0;j<NUMBER_OF_COLUMNS;j++){
+                gameGrid[i][j]=new Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2();
+                mainPanel.add(gameGrid[i][j]);
+            }
+        }
     }
 
     /**
-     * This mouseAdapter registers mouse presses on individual Tic_Tac_Toe_Single_Player_Version_1_0_1 tiles.
+     * This mouseAdapter registers mouse presses on individual Tic_Tac_Toe_Single_Player_Version_1_0_2 tiles.
      */
     class TicTacToeListener extends MouseAdapter {
 
         public void mousePressed(MouseEvent e){
 
-            Tic_Tac_Toe_Tile tile=(Tic_Tac_Toe_Tile) e.getSource();
-            System.out.print(tile.isFilled());
+            Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2 tile=(Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2) e.getSource();
             if(!tile.isFilled()){
-                if(Tic_Tac_Toe_Tile.isFirstMove()){
-                    Tic_Tac_Toe_Tile.startGame();
+                if(Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2.isFirstMove()){
+                    Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2.startGame();
                 }
                 tile.draw();
-                Tic_Tac_Toe_Single_Player_Version_1_0_1.this.squaresFilled++;
-                Tic_Tac_Toe_Single_Player_Version_1_0_1.this.markOnGrid(tile.getRow(),tile.getColumn());
-                Tic_Tac_Toe_Single_Player_Version_1_0_1.this.checkEndGameConditions();
+                Tic_Tac_Toe_Single_Player_Version_1_0_2.this.squaresFilled++;
+                Tic_Tac_Toe_Single_Player_Version_1_0_2.this.markOnGrid(tile.getRow(),tile.getColumn());
+                Tic_Tac_Toe_Single_Player_Version_1_0_2.this.checkEndGameConditions();
             }
         }
     }
@@ -67,13 +79,13 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_1 extends JFrame {
     }
 
     /**
-     * This method adds the Tic_Tac_Toe_Single_Player_Version_1_0_1 components/tiles to the UI game grid.
+     * This method adds the Tic_Tac_Toe_Single_Player_Version_1_0_2 components/tiles to the UI game grid.
      */
     public void addTiles(){
 
         for(int i=0;i<NUMBER_OF_ROWS;i++){
             for(int j=0;j<NUMBER_OF_COLUMNS;j++){
-                JComponent tile =new Tic_Tac_Toe_Tile(i, j);
+                JComponent tile =new Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2(i, j);
                 MouseListener listener=new TicTacToeListener();
                 tile.addMouseListener(listener);
                 mainPanel.add(tile);
@@ -82,16 +94,16 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_1 extends JFrame {
     }
 
     /**
-     * This method assigns a value to the element in the ticTacToeGrid that corresponds to the row and column values of the Tic_Tac_Toe_Single_Player_Version_1_0_1 component that generated a mousePressed() event.
+     * This method assigns a value to the element in the ticTacToeGrid that corresponds to the row and column values of the Tic_Tac_Toe_Single_Player_Version_1_0_2 component that generated a mousePressed() event.
      * If isNoughts returns true that element is assigned an integer value of 1, if it returns false an integer value of 2.
      * @param row an integer
      * @param column an integer
      */
     public void markOnGrid(int row, int column){
-        if(Tic_Tac_Toe_Tile.isNoughts()){
+        if(Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2.isNoughts()){
             ticTacToeGrid[row][column]=NOUGHTS_VALUE;
         }
-        else if(!Tic_Tac_Toe_Tile.isNoughts()){
+        else if(!Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2.isNoughts()){
             ticTacToeGrid[row][column]=CROSSES_VALUE;
         }
     }
@@ -104,7 +116,7 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_1 extends JFrame {
      * 2) All tiles are occupied but condition 1 is not met.
      */
     public void checkEndGameConditions() {
-        int gridValue= Tic_Tac_Toe_Tile.isNoughts() ? NOUGHTS_VALUE : CROSSES_VALUE;
+        int gridValue= Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2.isNoughts() ? NOUGHTS_VALUE : CROSSES_VALUE;
 
         // Iterate over rows and check for win condition.
         for(int row=0;row<NUMBER_OF_ROWS;row++){
@@ -155,7 +167,7 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_1 extends JFrame {
             row++;
         }
 
-        if(gameWon || Tic_Tac_Toe_Single_Player_Version_1_0_1.this.squaresFilled==NUMBER_OF_ROWS*NUMBER_OF_COLUMNS){
+        if(gameWon || Tic_Tac_Toe_Single_Player_Version_1_0_2.this.squaresFilled==NUMBER_OF_ROWS*NUMBER_OF_COLUMNS){
 
             displayEndOfGameMessage();
         }
@@ -168,7 +180,7 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_1 extends JFrame {
         String message="";
         String title="";
         if(gameWon) {
-            String winner = Tic_Tac_Toe_Tile.isNoughts() ? "Noughts" : "Crosses";
+            String winner = Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2.isNoughts() ? "Noughts" : "Crosses";
             message=String.format("%s wins! Play again?", winner);
             title="Victory!";
         }
@@ -190,7 +202,7 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_1 extends JFrame {
      * This method resets the game state.
      */
     public void restart(){
-        Tic_Tac_Toe_Tile.resetGame();
+        Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2.resetGame();
         this.gameWon=false;
         this.squaresFilled=0;
         this.resetGrid();
@@ -208,7 +220,7 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_1 extends JFrame {
     }
 
     public static void createAndShowGUI(){
-        Tic_Tac_Toe_Single_Player_Version_1_0_1 frame=new Tic_Tac_Toe_Single_Player_Version_1_0_1();
+        Tic_Tac_Toe_Single_Player_Version_1_0_2 frame=new Tic_Tac_Toe_Single_Player_Version_1_0_2();
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JOptionPane.showMessageDialog(frame, "Tic Tac Toe (Noughts & Crosses) \n Single Player Version \n Version 1.01 by Daan Pol 2019", "Tic Tac Toe", JOptionPane.PLAIN_MESSAGE);
