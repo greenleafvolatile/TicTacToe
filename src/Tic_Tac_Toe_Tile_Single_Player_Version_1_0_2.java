@@ -3,10 +3,10 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 
 /**
- * A Tic_Tac_Toe_Single_Player_Version_1_0_1 component constitutes one tile in a Tic_Tac_Toe_Single_Player_Version_1_0_1 (Noughts & Crosses) game.
+ * A Tic_Tac_Toe_Single_Player_Version_1_0_2 component constitutes one tile in a Tic_Tac_Toe_Single_Player_Version_1_0_2 (Noughts & Crosses) game.
  */
 
-public class Tic_Tac_Toe_Tile extends JComponent {
+public class Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2 extends JComponent {
 
 
     private static final int STROKE_THICKNESS=5, BORDER_THICKNESS=2;
@@ -22,15 +22,15 @@ public class Tic_Tac_Toe_Tile extends JComponent {
      * @param row an integer representing the objects row position in the game grid.
      * @param column an integer representing the objects column position in the game grid.
      */
-    public Tic_Tac_Toe_Tile(int row, int column){
+    public Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2(){
         border=new LineBorder(Color.PINK, BORDER_THICKNESS);
         setBorder(border);
-        this.row=row;
-        this.column=column;
+        //this.row=row;
+        //this.column=column;
     }
 
     /**
-     * This method sets a Tic_Tac_Toe_Single_Player_Version_1_0_1 component's isFilled value to false when noughts is false and firstMove is false(i.e. at the beginning of a game).
+     * This method sets a Tic_Tac_Toe_Single_Player_Version_1_0_2 component's isFilled value to false when noughts is false and firstMove is false(i.e. at the beginning of a game).
      * If noughts is true and firstMove is false, this method draws a nought (circle).
      * If noughts if false and firstMove is false, this method draws a cross.
      * @param g a Graphics object.
@@ -57,7 +57,7 @@ public class Tic_Tac_Toe_Tile extends JComponent {
     }
 
     /**
-     * This methods draw a nought on a Tic_Tac_Toe_Single_Player_Version_1_0_1 component.
+     * This methods draw a nought on a Tic_Tac_Toe_Single_Player_Version_1_0_2 component.
      * @param g2d a Graphics2D object.
      */
     private void drawNought(Graphics2D g2d){
@@ -66,7 +66,7 @@ public class Tic_Tac_Toe_Tile extends JComponent {
     }
 
     /**
-     * This method draws a Cross on a Tic_Tac_Toe_Single_Player_Version_1_0_1 component.
+     * This method draws a Cross on a Tic_Tac_Toe_Single_Player_Version_1_0_2 component.
      * @param g2d a Graphics2D object.
      */
     private void drawCross(Graphics2D g2d){
@@ -75,7 +75,7 @@ public class Tic_Tac_Toe_Tile extends JComponent {
     }
 
     /**
-     * This method redraws a Tic_Tac_Toe_Single_Player_Version_1_0_1 component when it is the source of a mousePressed() event.
+     * This method redraws a Tic_Tac_Toe_Single_Player_Version_1_0_2 component when it is the source of a mousePressed() event.
      */
     public void draw() {
         repaint();
@@ -85,17 +85,17 @@ public class Tic_Tac_Toe_Tile extends JComponent {
      * This method returns the row number of a component/tile corresponding to its place in the game grid (ticTacToeGrid).
      * @return an integer
      */
-    public int getRow(){
+    /*public int getRow(){
         return row;
-    }
+    }*/
 
     /**
      * This method returns the column number of a component/tile corresponding to its place in the game grid (ticTacToeGrid).
      * @return an integer
      */
-    public int getColumn(){
+    /*public int getColumn() {
         return column;
-    }
+    }*/
 
     /**
      * This method returns the value of isNoughts, thereby indicating that either a cross or a nought will be drawn when repaint() is next invoked.
@@ -114,7 +114,7 @@ public class Tic_Tac_Toe_Tile extends JComponent {
     }
 
     /**
-     * This method returns the value of isFirstMove. If isFirstMove returns true this indicates the game has not yet begun, and all Tic_Tac_Toe_Single_Player_Version_1_0_1 components/objects will be drawn blank.
+     * This method returns the value of isFirstMove. If isFirstMove returns true this indicates the game has not yet begun, and all Tic_Tac_Toe_Single_Player_Version_1_0_2 components/objects will be drawn blank.
      * @return a boolean
      */
     public static boolean isFirstMove() {
