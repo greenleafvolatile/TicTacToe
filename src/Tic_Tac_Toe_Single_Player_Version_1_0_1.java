@@ -112,7 +112,7 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_1 extends JFrame {
                 if(ticTacToeGrid[row][column]!=gridValue){
                     break;
                 }
-                if(column==NUMBER_OF_COLUMNS-1){
+                else if(column==NUMBER_OF_COLUMNS-1){
                    gameWon=true;
                 }
             }
@@ -124,7 +124,7 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_1 extends JFrame {
                 if(ticTacToeGrid[row][column]!=gridValue){
                     break;
                 }
-                if(row==NUMBER_OF_ROWS-1){
+                else if(row==NUMBER_OF_ROWS-1){
                     gameWon=true;
                 }
             }
@@ -137,7 +137,7 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_1 extends JFrame {
             if(ticTacToeGrid[column][row]!=gridValue){
                 break;
             }
-            if(column==NUMBER_OF_COLUMNS-1){
+            else if(column==NUMBER_OF_COLUMNS-1){
                 gameWon=true;
             }
             row++;
@@ -149,7 +149,7 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_1 extends JFrame {
             if(ticTacToeGrid[column][row]!=gridValue){
                 break;
             }
-            if(column==0){
+            else if(column==0){
                 gameWon=true;
             }
             row++;
