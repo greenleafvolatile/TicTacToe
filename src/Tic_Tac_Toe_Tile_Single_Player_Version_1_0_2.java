@@ -67,7 +67,7 @@ public class Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2 extends JComponent {
     /**
      * This method resets the turn logic (which causes a blank tile to be drawn).
      */
-    public static void resetGame(){
+    public  static void resetGame(){
         noughtsTurn=false;
         firstMove=true;
     }
@@ -108,7 +108,6 @@ public class Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2 extends JComponent {
     public int getValue(){
         return value;
     }
-
 }
 
 
