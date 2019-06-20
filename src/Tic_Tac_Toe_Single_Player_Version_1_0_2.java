@@ -19,7 +19,7 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_2 extends JFrame {
     private Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2[][] gameGrid;
 
 
-    public Tic_Tac_Toe_Single_Player_Version_1_0_2(){
+    private Tic_Tac_Toe_Single_Player_Version_1_0_2(){
         createMainPanel();
         constructGameGrid();
         squaresFilled=0;
@@ -37,7 +37,7 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_2 extends JFrame {
 
             Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2 tile=(Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2) e.getSource();
 
-            if(tile.isFilled()==false){
+            if(!tile.isFilled()){
                 if(Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2.isFirstMove()){
                     Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2.setNoughtsTurn(true);
                     Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2.setFirstMove(false);
@@ -61,7 +61,7 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_2 extends JFrame {
     /**
      * This method constructs the main panel.
      */
-    public void createMainPanel(){
+    private void createMainPanel(){
         final int BORDER_THICKNESS=5;
         mainPanel=new JPanel();
         mainPanel.setLayout(new GridLayout(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS));
@@ -89,7 +89,7 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_2 extends JFrame {
      * 1) Either Noughts or Crosses occupies an entire row, column, or diagonal.
      * 2) All tiles are occupied but condition 1 is not met.
      */
-    public void checkEndGameConditions() {
+    private void checkEndGameConditions() {
         int value=Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2.isNoughtsTurn()?NOUGHT_VALUE:CROSSES_VALUE;
 
         //Iterate over rows and check for win condition.
@@ -152,15 +152,15 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_2 extends JFrame {
     /**
      * This method displays an endgame message. The message is dependent on the endgame state reached.
      */
-    public void displayEndOfGameMessage(){
-        String message="";
-        String title="";
+    private void displayEndOfGameMessage(){
+        String message;
+        String title;
         if(gameWon) {
             String winner = Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2.isNoughtsTurn() ? "Noughts" : "Crosses";
             message=String.format("%s wins! Play again?", winner);
             title="Victory!";
         }
-        else if(!gameWon) {
+        else{
             message = "Nobody wins. Play again?";
             title = "It's a draw!";
         }
@@ -177,7 +177,7 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_2 extends JFrame {
     /**
      * This method resets the game state.
      */
-    public void restart(){
+    private void restart(){
         Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2.setFirstMove(true);
         Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2.resetGame();
         this.gameWon=false;
@@ -191,7 +191,7 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_2 extends JFrame {
         }
     }
 
-    public static void createAndShowGUI(){
+    private static void createAndShowGUI(){
         Tic_Tac_Toe_Single_Player_Version_1_0_2 frame=new Tic_Tac_Toe_Single_Player_Version_1_0_2();
 
         frame.setLocationRelativeTo(null);
@@ -202,7 +202,7 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_2 extends JFrame {
     }
 
     public static void main(String[] args){
-        SwingUtilities.invokeLater(()-> createAndShowGUI());
+        SwingUtilities.invokeLater(Tic_Tac_Toe_Single_Player_Version_1_0_2::createAndShowGUI);
     }
 
 }
