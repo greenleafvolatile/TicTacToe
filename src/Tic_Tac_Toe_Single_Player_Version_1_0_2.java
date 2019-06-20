@@ -178,17 +178,17 @@ public class Tic_Tac_Toe_Single_Player_Version_1_0_2 extends JFrame {
      * This method resets the game state.
      */
     public void restart(){
-        for(int i=0;i<NUMBER_OF_ROWS;i++){
-            for(int j=0;j<NUMBER_OF_COLUMNS;j++){
-                gameGrid[i][j].setFilled(false);
-                gameGrid[i][j].setValue(DEFAULT_GRID_VALUE);
-            }
-        }
         Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2.setFirstMove(true);
         Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2.resetGame();
         this.gameWon=false;
         this.squaresFilled=0;
-        this.repaint();
+        for(int i=0;i<NUMBER_OF_ROWS;i++){
+            for(int j=0;j<NUMBER_OF_COLUMNS;j++){
+                gameGrid[i][j].setFilled(false);
+                gameGrid[i][j].setValue(DEFAULT_GRID_VALUE);
+                gameGrid[i][j].repaint();
+            }
+        }
     }
 
     public static void createAndShowGUI(){
