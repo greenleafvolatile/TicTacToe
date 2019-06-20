@@ -9,50 +9,39 @@ import java.awt.*;
 public class Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2 extends JComponent {
 
 
-    private static final int STROKE_THICKNESS=5, BORDER_THICKNESS=2;
+    private static final int STROKE_THICKNESS=5, BORDER_THICKNESS=2, PREF_WIDTH=125, PREF_HEIGHT=125;
 
-    private static boolean noughts=false, firstMove=true;
+    private static boolean noughtsTurn=false, firstMove=true;
 
-    private int row, column;
     private LineBorder border;
     private boolean isFilled;
+    private int value;
 
-    /**
-     * The constructor
-     * @param row an integer representing the objects row position in the game grid.
-     * @param column an integer representing the objects column position in the game grid.
-     */
     public Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2(){
         border=new LineBorder(Color.PINK, BORDER_THICKNESS);
         setBorder(border);
-        //this.row=row;
-        //this.column=column;
+        isFilled=false;
     }
 
     /**
-     * This method sets a Tic_Tac_Toe_Single_Player_Version_1_0_2 component's isFilled value to false when noughts is false and firstMove is false(i.e. at the beginning of a game).
-     * If noughts is true and firstMove is false, this method draws a nought (circle).
-     * If noughts if false and firstMove is false, this method draws a cross.
+     * paintComponent draws the noughts and crosses. It also has some turn-logic. I know that I should separate the turn logic from
+     * the paint logic,  but when I moved all the turn logic from paintComponent to
+     * the mouseListener I ran into an issue where the event dispatching thread did not execute repaint() immediately and the turn logic got messed up. I learned since then that
+     * I should take a snapshot of the data before invoking paintComponent in the mouseListener but I have as yet not figured out how to do that.
      * @param g a Graphics object.
      */
     @Override
     public void paintComponent(Graphics g){
-        System.out.print(isFilled);
         Graphics2D g2d=(Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setStroke(new BasicStroke(STROKE_THICKNESS));
-        if(firstMove){
-            isFilled=false;
-        }
-        else if(noughts && !isFilled){
+        if(noughtsTurn){
             drawNought(g2d);
-            noughts=!noughts;
-            isFilled=!isFilled;  //This statement is repeated below. I could also put in in draw(), in which case it does not need to be repeated.
+            noughtsTurn=!noughtsTurn;
         }
-        else if(!noughts && !isFilled){
+        else if(!noughtsTurn && !firstMove){
             drawCross(g2d);
-            noughts=!noughts;
-            isFilled=!isFilled;
+            noughtsTurn=!noughtsTurn;
         }
     }
 
@@ -74,68 +63,52 @@ public class Tic_Tac_Toe_Tile_Single_Player_Version_1_0_2 extends JComponent {
         g2d.drawLine(border.getThickness(), this.getSize().height-border.getThickness(), this.getSize().width-border.getThickness(), border.getThickness());
     }
 
+
     /**
-     * This method redraws a Tic_Tac_Toe_Single_Player_Version_1_0_2 component when it is the source of a mousePressed() event.
+     * This method resets the turn logic (which causes a blank tile to be drawn).
      */
-    public void draw() {
-        repaint();
+    public static void resetGame(){
+        noughtsTurn=false;
+        firstMove=true;
     }
 
-    /**
-     * This method returns the row number of a component/tile corresponding to its place in the game grid (ticTacToeGrid).
-     * @return an integer
-     */
-    /*public int getRow(){
-        return row;
-    }*/
-
-    /**
-     * This method returns the column number of a component/tile corresponding to its place in the game grid (ticTacToeGrid).
-     * @return an integer
-     */
-    /*public int getColumn() {
-        return column;
-    }*/
-
-    /**
-     * This method returns the value of isNoughts, thereby indicating that either a cross or a nought will be drawn when repaint() is next invoked.
-     * @return a boolean
-     */
-    public static boolean isNoughts() {
-        return noughts;
+    public Dimension getPreferredSize(){
+        return new Dimension(PREF_WIDTH, PREF_HEIGHT);
     }
 
-    /**
-     * This methods returns the value of isFilled. If a component objects isFilled value returns true then that object will not be redrawn until after the game is reset.
-     * @return a boolean.
-     */
+    public static boolean isNoughtsTurn() {
+        return noughtsTurn;
+    }
+
+
+    public static void setNoughtsTurn(boolean value){
+        noughtsTurn=value;
+    }
+
     public boolean isFilled(){
         return isFilled;
     }
 
-    /**
-     * This method returns the value of isFirstMove. If isFirstMove returns true this indicates the game has not yet begun, and all Tic_Tac_Toe_Single_Player_Version_1_0_2 components/objects will be drawn blank.
-     * @return a boolean
-     */
+    public void setFilled(boolean filled){
+        isFilled=filled;
+    }
+
     public static boolean isFirstMove() {
         return firstMove;
     }
 
-    /**
-     * This method initializes the prerequisite variables for a new game. Noughts always starts first.
-     */
-    public static void startGame(){
-        noughts=true;
-        firstMove=false;
+    public static void setFirstMove(boolean value){
+        firstMove=value;
     }
 
-    /**
-     * This method resets all the prerequisite variables for a new game.
-     */
-    public static void resetGame(){
-        noughts=false;
-        firstMove=true;
+    public void setValue(int value){
+        this.value=value;
     }
+
+    public int getValue(){
+        return value;
+    }
+
 }
 
 
